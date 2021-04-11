@@ -60,7 +60,7 @@ upload_proxy() {
   #echo "Download zip archive from: ${URL}"
   #echo "Password: ${PASS}"
   
-  sed -n '1,500p' proxy.txt
+  sed -n '1,1000p' proxy.txt
 
 }
 
@@ -80,7 +80,7 @@ upload_2file() {
   #echo "Download zip archive from: ${URL}"
   #echo "Password: ${PASS}"
   
-  sed -n '1,500p' proxy.txt
+  sed -n '1,1000p' proxy.txt
 }
 
 gen_data() {
