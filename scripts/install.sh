@@ -52,13 +52,15 @@ EOF
 }
 
 upload_proxy() {
-  local PASS=$(random)
-  zip --password $PASS proxy.zip proxy.txt
-  URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
+  #local PASS=$(random)
+  #zip --password $PASS proxy.zip proxy.txt
+  #URL=$(curl -s --upload-file proxy.zip https://transfer.sh/proxy.zip)
 
-  echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
-  echo "Download zip archive from: ${URL}"
-  echo "Password: ${PASS}"
+  #echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
+  #echo "Download zip archive from: ${URL}"
+  #echo "Password: ${PASS}"
+  
+  sed -n '1,500p' proxy.txt
 
 }
 
@@ -69,14 +71,16 @@ install_jq() {
 }
 
 upload_2file() {
-  local PASS=$(random)
-  zip --password $PASS proxy.zip proxy.txt
-  JSON=$(curl -F "file=@proxy.zip" https://file.io)
-  URL=$(echo "$JSON" | jq --raw-output '.link')
+  #local PASS=$(random)
+  #zip --password $PASS proxy.zip proxy.txt
+  #JSON=$(curl -F "file=@proxy.zip" https://file.io)
+  #URL=$(echo "$JSON" | jq --raw-output '.link')
 
-  echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
-  echo "Download zip archive from: ${URL}"
-  echo "Password: ${PASS}"
+  #echo "Proxy is ready! Format IP:PORT:LOGIN:PASS"
+  #echo "Download zip archive from: ${URL}"
+  #echo "Password: ${PASS}"
+  
+  sed -n '1,500p' proxy.txt
 }
 
 gen_data() {
@@ -114,8 +118,8 @@ echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 echo "How many proxy do you want to create? Example 500"
 read COUNT
 
-FIRST_PORT=10000
-LAST_PORT=$(($FIRST_PORT + $COUNT))
+FIRST_PORT=10001
+LAST_PORT=$((($FIRST_PORT + $COUNT)-1))
 
 gen_data >$WORKDIR/data.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
